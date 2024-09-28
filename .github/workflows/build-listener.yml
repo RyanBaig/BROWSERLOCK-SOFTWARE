@@ -1,4 +1,4 @@
-name: Build Executable
+name: Build Executable (LISTENER.PY)
 
 on:
   push:
