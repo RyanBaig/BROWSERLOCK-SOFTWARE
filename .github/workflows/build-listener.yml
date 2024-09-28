@@ -1,0 +1,33 @@
+name: Build Executable
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest]  # You can add more OSes if needed
+        
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build Executable
+      uses: Martin005/pyinstaller-action@v1.2.0
+      with:
+        spec: listener.spec
+        path: .  # Use "." if the spec file is in the root directory
+        requirements: requirements.txt
+        pypi_url: https://pypi.python.org/
+        pypi_index_url: https://pypi.python.org/simple
+        
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: listener
+        path: dist
