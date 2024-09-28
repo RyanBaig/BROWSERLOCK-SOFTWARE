@@ -11,10 +11,10 @@ passcode = "123456789"
 
 # Create the CustomTkinter app
 app = customtkinter.CTk()
-app.title("Passcode App")
+app.title("BrowserLock App")
 
 # Create a header label
-header_label = customtkinter.CTkLabel(app, text="TSS Browser Lock", font=("Arial", 24, "bold"))
+header_label = customtkinter.CTkLabel(app, text="Browser Lock", font=("Arial", 24, "bold"))
 header_label.pack(pady=(20, 5))  # Add some padding for spacing
 
 # Create a subheader label
@@ -76,7 +76,7 @@ submit_button = customtkinter.CTkButton(app, text="Submit", command=check_passco
 submit_button.pack(pady=10)
 
 # Create a footer label with small text
-footer_label = customtkinter.CTkLabel(app, text="Made by Ryan Baig - Class 7", font=("Arial", 10))
+footer_label = customtkinter.CTkLabel(app, text="Made by Ryan Baig", font=("Arial", 10))
 footer_label.pack(side="bottom", pady=(10, 20))  # Add some padding for spacing
 
 # Run the app
