@@ -16,18 +16,19 @@ jobs:
         
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Build Executable
-      uses: Martin005/pyinstaller-action@v1.2.0
-      with:
-        spec: listener.spec
-        path: .  # Use "." if the spec file is in the root directory
-        requirements: requirements.txt
-        pypi_url: https://pypi.python.org/
-        pypi_index_url: https://pypi.python.org/simple
+
+    - name: Create Executable
+        uses: sayyid5416/pyinstaller@v1
+        with:
+          python_ver: '3.8'
+          pyinstaller_ver: '==6.10.2'
+          spec: 'listener.spec'
+          requirements: 'requirements.txt'
+          upload_exe_with_name: 'TSS-BROWSERLOCK LISTENER'
+          options: --onefile, --name "TSS BROWSERLOCK LISTENER", --windowed, --noconsole, 
         
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: listener
+        name: main
         path: dist
