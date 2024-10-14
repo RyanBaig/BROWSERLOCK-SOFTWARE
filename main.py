@@ -31,7 +31,12 @@ def check_passcode():
     user_input = "".join([entry.get() for entry in entries])
     
     if user_input == passcode:
-        subprocess.Popen(["/snap/bin/brave"])  # Launch Brave browser
+        try:
+            subprocess.Popen([r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe", "--browserlock-verified=true"])
+        except PermissionError as e:
+            print(f"Permission Error: {e}")
+        except Exception as e:
+            print(f"An error occurred: {e}")
         app.destroy()
     else:
         CTkMessagebox(title="Error", message="Incorrect passcode. Please try again.", icon="cancel")
@@ -43,18 +48,17 @@ def on_key_press(event, index):
     if len(event.char) == 1 and event.char.isdigit():  # Allow only one digit
         entries[index].delete(0, "end")  # Clear previous input
 
-        
         # Move to the next entry if not the last one
         if index < len(entries) - 1:
             entries[index + 1].focus_set()
         else:
-            # If it's the last entry, check the passcode when filled
-            check_passcode()  # Call check_passcode() here after inserting character
+            # If it's the last entry, check the passcode after a slight delay
+            app.after(100, check_passcode)  # Call check_passcode() after 100 milliseconds
     elif event.keysym == "Return":  # Move to next entry on Enter key
         if index < len(entries) - 1:
             entries[index + 1].focus_set()
         else:
-            check_passcode()
+            app.after(100, check_passcode)  # Call check_passcode() after delay on Enter key
     else:
         # Prevent non-numeric input
         return "break"
